@@ -1,0 +1,219 @@
+/* --- Importación de Fuente y Reseteo Básico --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* --- Contenedor Principal de la App --- */
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- Barra Lateral --- */
+.sidebar {
+    width: 80px;
+    background-color: #fff;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #e9ecef;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.add-note-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #343a40;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, background-color 0.2s;
+    z-index: 10;
+}
+
+.add-btn:hover {
+    transform: scale(1.1);
+}
+
+.add-btn.active {
+    transform: rotate(45deg);
+}
+
+.color-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    /* Oculto por defecto, se mostrará con JS */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.color-options.show {
+    max-height: 300px; /* Altura suficiente para los colores */
+    opacity: 1;
+}
+
+.color-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.color-circle:hover {
+    transform: scale(1.2);
+}
+
+/* --- Contenido Principal --- */
+.main-content {
+    flex: 1;
+    padding: 30px 40px;
+    overflow-y: auto;
+}
+
+.main-content header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.main-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #e9ecef;
+    padding: 8px 15px;
+    border-radius: 20px;
+    width: 250px;
+}
+
+.search-bar i {
+    color: #adb5bd;
+}
+
+.search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+    margin-left: 10px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+/* --- Cuadrícula de Notas --- */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.note {
+    height: 280px;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeIn 0.5s ease;
+}
+
+.note:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.note textarea {
+    flex: 1;
+    background: none;
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+    height: 100%;
+}
+
+/* Deshabilitar edición por defecto */
+.note textarea:not(.editable) {
+    pointer-events: none;
+}
+/* Permitir edición cuando tiene la clase */
+.note textarea.editable {
+    pointer-events: all;
+    border-bottom: 1px dashed #555;
+}
+
+.note-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.note-date {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.note-actions button {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.08);
+    transition: background-color 0.2s;
+}
+
+.note-actions button:hover {
+    background-color: rgba(0,0,0,0.15);
+}
